@@ -1,11 +1,18 @@
 import { Module } from '@nestjs/common';
+import { ConsentsDbModule } from '@open-banking-workspace/db/consents-db';
 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { ConsentController } from './consent/consent.controller';
+import { ConsentService } from './consent/consent.service';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [ConsentsDbModule.forRoot({
+      database: process.env.BACK_TRANSMITTER_DB_CONSENT_NAME,
+      host: process.env.BACK_TRANSMITTER_DB_CONSENT_HOST,
+      password: process.env.BACK_TRANSMITTER_DB_CONSENT_PASS,
+      port: parseInt(process.env.BACK_TRANSMITTER_DB_CONSENT_PORT || '3306' ),
+      username: process.env.BACK_TRANSMITTER_DB_CONSENT_USER
+  })],
+  controllers: [ConsentController],
+  providers: [ConsentService],
 })
 export class AppModule {}

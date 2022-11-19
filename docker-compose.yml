@@ -1,0 +1,22 @@
+version: '3.3'
+
+services:
+  bank-transmitter-consent-db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'bank-transmitter-consent-db'
+      MYSQL_USER: 'bank-transmitter-consent-db-user'
+      MYSQL_PASSWORD: 'bank-transmitter-consent-db-pass'
+      MYSQL_ROOT_PASSWORD: 'bank-transmitter-consent-db-pass'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - ~/bank-transmitter-consent-db-volume:/var/lib/mysql
+
+
+# Names our volume
+volumes:
+  bank-transmitter-consent-db-volume:

@@ -14,7 +14,14 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@open-banking-workspace/db/consents-db": [
+        "libs/db/consents-db/src/index.ts"
+      ],
+      "@open-banking-workspace/schema/api/consents": [
+        "libs/schema/api/consents/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

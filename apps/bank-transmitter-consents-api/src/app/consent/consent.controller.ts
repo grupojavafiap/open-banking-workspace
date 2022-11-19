@@ -1,0 +1,53 @@
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { ApiOperation, ApiResponse, ApiTags, ApiBody } from '@nestjs/swagger';
+import { RequestCreateConsent, ResponseCreateConsent } from '@open-banking-workspace/schema/api/consents';
+import { RequestCreateConsentDoc } from 'libs/schema/api/consents/src/lib/request-create-consent.doc';
+import { ConsentService } from './consent.service';
+
+
+@ApiTags("Consents")
+@Controller("consents")
+export class ConsentController {
+
+    constructor(private consentService:ConsentService){}
+
+    @Post("v2/consents")
+    @ApiOperation({ summary: 'Criar novo pedido de consentimento.' })
+    @ApiResponse({ status: 201, description: 'Consentimento criado.'})
+    @ApiBody({
+      schema: {
+        example: RequestCreateConsentDoc
+      }
+    })
+    create(@Body() payload: RequestCreateConsent)   
+    {
+      return this.consentService.create(payload);
+    }
+      
+
+    @Get("v2/consents/:consentId")
+    @ApiOperation({ summary: 'Obter detalhes do consentimento identificado por consentId.' })
+    @ApiResponse({ status: 200, description: 'Retorna informações do consentimento' })
+    findByConsentId(@Param('consentId') consentId: string): Promise<ResponseCreateConsent>
+    {
+      return this.consentService.findByConsentId(consentId);
+    }
+
+
+    @Delete("v2/consents/:consentId")
+    @ApiOperation({ summary: 'Deletar / Revogar o consentimento identificado por consentId.' })
+    @ApiResponse({ status: 204, description: 'Consentimento revogado' })
+    deleteByConsentId(@Param('consentId') consentId: string): Promise<ResponseCreateConsent>
+    {
+      return this.consentService.revokeByConsentId(consentId);
+    }
+
+
+    @Put("v2/consents/:consentId")
+    @ApiOperation({ summary: 'Autorizar o consentimento pendente.' })
+    @ApiResponse({ status: 200, description: 'Consentimento autorizado' })
+    authorizeByConsentId(@Param('consentId') consentId: string): Promise<ResponseCreateConsent>
+    {
+      return this.consentService.authorizeByConsentId(consentId);
+    }
+ }
