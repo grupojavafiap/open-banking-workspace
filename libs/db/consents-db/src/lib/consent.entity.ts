@@ -8,6 +8,9 @@ export class Consent
     id: number;
     
     @Column()
+    clientName:string;
+
+    @Column()
     consentId:string;
 
     @Column()

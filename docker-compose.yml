@@ -16,7 +16,24 @@ services:
     volumes:
       - ~/bank-transmitter-consent-db-volume:/var/lib/mysql
 
+  bank-receiver-consent-db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'bank-receiver-consent-db'
+      MYSQL_USER: 'bank-receiver-consent-db-user'
+      MYSQL_PASSWORD: 'bank-receiver-consent-db-pass'
+      MYSQL_ROOT_PASSWORD: 'bank-receiver-consent-db-pass'
+    ports:
+      - '3307:3306'
+    expose:
+      - '3307'
+    volumes:
+      - ~/bank-receiver-consent-db-volume:/var/lib/mysql
 
 # Names our volume
 volumes:
   bank-transmitter-consent-db-volume:
+    driver: local
+  bank-receiver-consent-db-volume:
+    driver: local

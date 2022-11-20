@@ -11,7 +11,7 @@ export class ConsentService {
 
     async create(request:RequestCreateConsent)
     {
-        const newConsent = await  this.consentDataService.save(request);
+        const newConsent = await  this.consentDataService.saveByRequest(request);
 
         return new ResponseCreateConsent((newConsent));
     }
@@ -33,4 +33,6 @@ export class ConsentService {
     {
         return new ResponseCreateConsent(await this.consentDataService.revokeByConsentId(consentId));
     }
+
+    
 }

@@ -50,4 +50,5 @@ export class ConsentController {
     {
       return this.consentService.authorizeByConsentId(consentId);
     }
+
  }

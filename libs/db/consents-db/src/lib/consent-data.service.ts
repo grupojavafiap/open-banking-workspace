@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { RequestCreateConsent } from '@open-banking-workspace/schema/api/consents';
+import { RequestCreateConsent, ResponseCreateConsent } from '@open-banking-workspace/schema/api/consents';
 import { Repository } from 'typeorm';
 import { Consent } from './consent.entity';
 import { randomUUID } from 'crypto';
@@ -16,7 +16,7 @@ export class ConsentDataService {
 
     
 
-    save(requestApi: RequestCreateConsent)
+    saveByRequest(requestApi: RequestCreateConsent)
     {
         if(requestApi)
         {
@@ -26,6 +26,7 @@ export class ConsentDataService {
             newEntity.businessId = requestApi.data.businessEntity.document.identification;
             newEntity.clientId = requestApi.data.loggedUser.document.identification;
             newEntity.created = now;
+            newEntity.clientName = requestApi.data.loggedUser.document.name;
             newEntity.consentId = randomUUID();
             newEntity.expire = new Date(requestApi.data.expirationDateTime);
             newEntity.status = ConsentStatus.AWAITING_AUTHORISATION;
@@ -38,6 +39,28 @@ export class ConsentDataService {
         }
     }
 
+
+    saveByResponseAndRequest(responseApi: ResponseCreateConsent, requestApi: RequestCreateConsent)
+    {
+        if(responseApi)
+        {
+            const newEntity = new Consent();
+            newEntity.businessId = requestApi.data.businessEntity.document.identification;
+            newEntity.clientId = requestApi.data.loggedUser.document.identification;
+            newEntity.created = new Date(responseApi.data.creationDateTime);;
+            newEntity.clientName = requestApi.data.loggedUser.document.name;
+            newEntity.consentId = responseApi.data.consentId;
+            newEntity.expire = new Date(responseApi.data.expirationDateTime);
+            newEntity.status = responseApi.data.status;
+            const permissions: any =  responseApi.data.permissions.map(p => ({
+                type: {id: p},
+            }));
+            newEntity.update = new Date(responseApi.data.statusUpdateDateTime);
+            newEntity.permissions = permissions;
+            return this.consentEntity.save(newEntity);
+        }
+    }
+    
 
     findOneByConsentId(consentId:string)
     {

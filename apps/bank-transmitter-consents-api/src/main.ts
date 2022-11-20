@@ -13,6 +13,8 @@ async function bootstrap() {
     const globalPrefix = 'bank-transmitter';
     app.setGlobalPrefix(globalPrefix);
 
+    app.enableCors();
+    
     app.useGlobalPipes(new ValidationPipe());
     
     const config = new DocumentBuilder()

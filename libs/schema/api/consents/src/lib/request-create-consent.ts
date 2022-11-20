@@ -1,6 +1,5 @@
-import {  IsNotEmpty,  IsDateString, IsArray, ValidateNested, IsString, IsObject, IsISO8601, IsDate, Matches, IsRFC3339  } from 'class-validator';
+import {  IsNotEmpty,  IsArray, ValidateNested, IsString, IsObject, IsRFC3339  } from 'class-validator';
 import {  ApiProperty } from '@nestjs/swagger';
-import { RequestCreateConsentDoc } from './request-create-consent.doc';
 
 export class Document {
 
@@ -9,6 +8,8 @@ export class Document {
   @IsNotEmpty()
   identification: string | undefined;
 
+  name?:string;
+  
   @ApiProperty()
   @IsString()
   @IsNotEmpty()
@@ -43,6 +44,8 @@ export class RequestCreateConsentData {
   @ApiProperty()
   @IsRFC3339()
   expirationDateTime: string | undefined;
+
+
 }
 
 export class RequestCreateConsent {
@@ -52,5 +55,6 @@ export class RequestCreateConsent {
   @IsNotEmpty()
   @IsObject()
   data: RequestCreateConsentData | undefined;
+
 
 }
