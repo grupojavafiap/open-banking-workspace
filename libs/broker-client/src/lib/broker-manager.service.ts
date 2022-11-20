@@ -1,6 +1,7 @@
 import { Injectable, Logger, OnApplicationShutdown } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as rabbit from 'amqplib';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 
 @Injectable()
 export class BrokerManagerService implements OnApplicationShutdown {
@@ -14,7 +15,7 @@ export class BrokerManagerService implements OnApplicationShutdown {
   public exchange = 'bank-receiver-consumed.x';
   public deadLetterExchange = `bank-receiver-consumed.dx`;
   public deadLetterQueue = `bank-receiver-consumed.dl`;
-  constructor(private config:ConfigService) {
+  constructor(private config:ConfigService, private eventEmitter: EventEmitter2) {
     this.init();
   }
 
@@ -42,8 +43,6 @@ export class BrokerManagerService implements OnApplicationShutdown {
 
       const connection = await this.getConnection();
       this.channel = await connection.createChannel();
-      
-
 
       await this.channel.assertExchange(this.exchange, 'direct', { durable: false });
 
@@ -66,11 +65,26 @@ export class BrokerManagerService implements OnApplicationShutdown {
         } 
 
       }
+
+      this.eventEmitter.emit(
+        'queues.created',
+        {
+          queues: this.queues
+        }
+      );
+      
     } 
     catch (e) 
     {
       this.logger.error(`ERRO NA INICIALIZAÇÃO DO RABBITMQ `, e);
     }
+  }
+
+
+  public async consumer(queue: string, onMessage: (msg: any) => void)
+  {
+    const channel = await this.getChannel();
+    channel.consume(queue, (msg) => onMessage(msg), { noAck: true });
   }
 
   /**
@@ -86,10 +100,10 @@ export class BrokerManagerService implements OnApplicationShutdown {
       try 
       {
             this.logger.log(
-              `\n---------- [publish] ------------\n>>> EXCHANGE ${this.exchange}\n>>> ROUTER_KEY ${queue}\n>>>MESSAGE ${messageStr}\n -----------------------------`,
+              `\n---------- [publish] ------------\n>>> EXCHANGE ${this.exchange}\n>>> ROUTER_KEY ${queue}\n>>>MESSAGE.length ${messageStr.length}\n -----------------------------`,
             );
             const channel = await this.getChannel();
-            channel.publish(this.exchange, queue, Buffer.from(messageStr));
+            channel.publish(this.exchange, queue, Buffer.from(messageStr), {expiration: 60000});
           
       } 
       catch (e) 

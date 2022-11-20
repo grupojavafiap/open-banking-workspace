@@ -4,12 +4,13 @@ import { ConsentService } from './consent/consent.service';
 import { ConsentController } from './consent/consent.controller';
 import { ConsentsDbModule } from '@open-banking-workspace/db/consents-db';
 import { ConfigModule } from '@nestjs/config';
-import { BrokerProducerService } from './broker/broker-producer.service';
-import { BrokerManagerService } from './broker/broker-manager.service';
+import { BrokerClientModule } from 'libs/broker-client/src';
+
 
 @Module({
   imports: [
     HttpModule,
+    BrokerClientModule,
     ConfigModule.forRoot(),
     ConsentsDbModule.forRoot({
       database: process.env.BACK_RECEIVER_DB_CONSENT_NAME,
@@ -20,8 +21,6 @@ import { BrokerManagerService } from './broker/broker-manager.service';
   })],
   controllers: [ConsentController],
   providers: [
-    ConsentService,
-    BrokerProducerService,
-    BrokerManagerService],
+    ConsentService],
 })
 export class AppModule {}

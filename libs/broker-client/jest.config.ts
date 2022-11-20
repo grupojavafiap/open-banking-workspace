@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'bank-transmitter-custumer-shared-data',
+  displayName: 'broker-client',
   preset: '../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -12,6 +12,5 @@ export default {
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory:
-    '../../coverage/apps/bank-transmitter-custumer-shared-data',
+  coverageDirectory: '../../coverage/libs/broker-client',
 };

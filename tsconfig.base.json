@@ -15,6 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@open-banking-workspace/broker-client": [
+        "libs/broker-client/src/index.ts"
+      ],
       "@open-banking-workspace/db/consents-db": [
         "libs/db/consents-db/src/index.ts"
       ],
