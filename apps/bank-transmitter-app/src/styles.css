@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+@import "../../../node_modules/ng-zorro-antd/ng-zorro-antd.min.css";
+
+
+.ant-layout-header{
+    background:#f67101;
+}
+
+.ant-btn-primary
+{
+    border-color: #f67101;
+    background: #f67101;
+}

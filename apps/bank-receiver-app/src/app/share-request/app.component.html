@@ -2,13 +2,12 @@
   <nz-header>
     <div class="logo">
       <span nz-icon nzType="bank" nzTheme="outline"></span>
-      Bank Receiver
+      Banco Receptor
     </div>
   </nz-header>
   <nz-content>
 
-    <nz-card nzTitle="Compartilhamento de dados">
-
+    <nz-card nzTitle="Compartilhamento de dados" *ngIf="typeFlow === 'shared'; else confirmation">
       <div nz-row [nzGutter]="24">
         <div nz-col [nzSpan]="12">
           <nz-card nzType="inner" nzTitle="Identificação do cliente">
@@ -40,8 +39,28 @@
       <div style="float: right">
         <button nz-button nzType="primary" (click)="confirm()">Confirmar solicitação de compartilhamento</button>
       </div>
-
     </nz-card>
+    <ng-template #confirmation>
+        <nz-result
+        nzStatus="success"
+        nzTitle="Parabéns {{consentData.clientName}}. Seus dados foram compartilhados com sucesso!!!"
+        nzSubTitle="Agora você já por utilizar os beneficios do open banking.">
+
+        <div nz-result-content>
+          <div class="desc">
+            <p nz-paragraph>
+              <span nz-icon nzType="arrow-right"></span>
+              Identificador do consentimento: <strong>{{consentData.consentId}} </strong>
+            </p>
+            <p nz-paragraph>
+              <span nz-icon nzType="arrow-right"></span>
+               Data de expiração : <strong>{{consentData.expire | date:'dd/MM/yyyy, hh:mm:ss' }} </strong>
+            </p>
+          </div>
+        </div>
+
+       </nz-result>
+    </ng-template>
   </nz-content>
-  <nz-footer>Bank Receiver ©2022</nz-footer>
+  <nz-footer>Banco Receptor ©2022</nz-footer>
 </nz-layout>

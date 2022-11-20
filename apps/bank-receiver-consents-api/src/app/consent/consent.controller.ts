@@ -1,8 +1,7 @@
-import { Body, Controller, Post, Res, } from '@nestjs/common';
+import { Body, Controller, Post, Put} from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { RequestCreateConsent } from '@open-banking-workspace/schema/api/consents';
 import { ConsentService } from './consent.service';
-import { Response } from 'express';
 
 @ApiTags("Consents")
 @Controller("consents")
@@ -12,12 +11,22 @@ export class ConsentController {
 
     @Post("v1/create")
     @ApiOperation({ summary: 'Cria um consentimento na IF escolhida e retorna o link de redirecionamento.' })
-    @ApiResponse({ status: 302, description: 'Link de redirecionamento'})
-    async create(@Res() response:Response, @Body() payload: RequestCreateConsent)   
+    @ApiResponse({ status: 200, description: 'Link de redirecionamento'})
+    async create(@Body() payload: RequestCreateConsent)   
     {
       const urlRedirect = await this.consentService.create(payload);
 
-      response.redirect(urlRedirect);
+      return {urlRedirect}
     }
+
+
+    @Put("v1/callback-authorize")
+    @ApiOperation({ summary: 'Recebe o JWS na volta da confirmação do consentimento.' })
+    @ApiResponse({ status: 200, description: 'Link de redirecionamento'})
+    async callback(@Body() payload: any) : Promise<any>
+    {
+      return  this.consentService.handlerCallbackAuthorize(payload.jws);
+    }
+      
       
  }

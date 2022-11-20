@@ -55,7 +55,8 @@
           "browserTarget": "bank-receiver-app:build:production"
         },
         "development": {
-          "browserTarget": "bank-receiver-app:build:development"
+          "browserTarget": "bank-receiver-app:build:development",
+          "port": 4200
         }
       },
       "defaultConfiguration": "development"

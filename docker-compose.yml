@@ -31,9 +31,28 @@ services:
     volumes:
       - ~/bank-receiver-consent-db-volume:/var/lib/mysql
 
+  rabbitmq:
+         image: rabbitmq:3-management
+         container_name: rabbitmq_management
+         
+         ports: 
+          - 25672:25672 # (erlang) communication between the nodes and CLI tool
+          - 15673:15672 # communication with the web management API 
+          - 5673:5672 # communication with the web management API 
+         expose:
+          - '5673'
+         volumes:
+          - ~/bank-receiver-rabbitmq:/var/lib/rabbitmq/
+         environment:
+          - RABBITMQ_DEFAULT_USER = guest
+          - RABBITMQ_DEFAULT_PASS = guest
+         restart: always
+
 # Names our volume
 volumes:
   bank-transmitter-consent-db-volume:
     driver: local
   bank-receiver-consent-db-volume:
+    driver: local
+  rabbitmq-volume:
     driver: local

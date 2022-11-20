@@ -10,7 +10,10 @@ export class ResponseCreateConsent {
                 consentId: consent.consentId,
                 creationDateTime: consent.created.toISOString(),
                 expirationDateTime: consent.expire.toISOString(),
-                permissions: consent.permissions.map(permission => permission.type.id),
+                permissions: consent.permissions.map(permission => ({
+                    type: permission.type.id,
+                    description: permission.type.description
+                })),
                 status: consent.status,
                 statusUpdateDateTime: consent.created.toISOString()
             }
@@ -37,8 +40,13 @@ export interface ResponseCreateConsentData {
     creationDateTime:     string;
     status:               string;
     statusUpdateDateTime: string;
-    permissions:          string[];
+    permissions:          Permission[];
     expirationDateTime:   string;
+}
+
+export interface Permission {
+    type:  string,
+    description:string
 }
 
 export interface Links {

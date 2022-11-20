@@ -42,18 +42,19 @@ export class ConsentDataService {
 
     saveByResponseAndRequest(responseApi: ResponseCreateConsent, requestApi: RequestCreateConsent)
     {
-        if(responseApi)
+        if(responseApi && requestApi)
         {
+            console.log("responseApi.data.permissions ", responseApi.data.permissions);
             const newEntity = new Consent();
             newEntity.businessId = requestApi.data.businessEntity.document.identification;
             newEntity.clientId = requestApi.data.loggedUser.document.identification;
-            newEntity.created = new Date(responseApi.data.creationDateTime);;
+            newEntity.created = new Date(responseApi.data.creationDateTime);
             newEntity.clientName = requestApi.data.loggedUser.document.name;
             newEntity.consentId = responseApi.data.consentId;
             newEntity.expire = new Date(responseApi.data.expirationDateTime);
             newEntity.status = responseApi.data.status;
             const permissions: any =  responseApi.data.permissions.map(p => ({
-                type: {id: p},
+                type: {id: p.type},
             }));
             newEntity.update = new Date(responseApi.data.statusUpdateDateTime);
             newEntity.permissions = permissions;

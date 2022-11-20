@@ -55,7 +55,8 @@
           "browserTarget": "bank-transmitter-app:build:production"
         },
         "development": {
-          "browserTarget": "bank-transmitter-app:build:development"
+          "browserTarget": "bank-transmitter-app:build:development",
+          "port": 4201
         }
       },
       "defaultConfiguration": "development"

@@ -15,7 +15,8 @@ import { CustomerService } from './customer/customer.service';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzModalModule } from 'ng-zorro-antd/modal';
-
+import { RouterModule } from '@angular/router';
+import { NzResultModule } from 'ng-zorro-antd/result';
 const antDesignIcons = AllIcons as {
   [key: string]: IconDefinition;
 };
@@ -26,6 +27,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
   imports: [
     NoopAnimationsModule,
     BrowserModule, 
+    RouterModule.forRoot([]),
     NzLayoutModule,
     NzIconModule.forRoot(icons),
     NzGridModule ,
@@ -34,6 +36,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     NzDividerModule,
     NzButtonModule,
     NzModalModule,
+    NzResultModule
     
   ],
   providers: [

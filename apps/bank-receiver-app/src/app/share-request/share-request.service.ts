@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Consent } from "libs/db/consents-db/src/lib/consent.entity";
 
 const expire = new Date();
 expire.setMonth(expire.getMonth() + 12);
@@ -15,7 +16,12 @@ export class ShareRequestService {
     {
         const request = this.buildPayloadRequest(cpf, name);
 
-        return this.http.post(`${this.baseURL}/consents/v1/create`, request);
+        return this.http.post<{urlRedirect:string}>(`${this.baseURL}/consents/v1/create`, request);
+    }
+
+    public authorizeShared(jws:string)
+    {
+      return this.http.put<Consent>(`${this.baseURL}/consents/v1/callback-authorize`, {jws});
     }
 
 

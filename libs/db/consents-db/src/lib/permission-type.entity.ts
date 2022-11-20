@@ -4,7 +4,10 @@ import { Column, Entity } from "typeorm";
 export class PermissionType
 {
     @Column({primary: true })
-    id: string;
+    id!: string;
+
+    @Column()
+    description!:string;
 }
 
 

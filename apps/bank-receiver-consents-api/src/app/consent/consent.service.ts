@@ -5,14 +5,21 @@ import { ConfigService } from '@nestjs/config';
 import { firstValueFrom, map } from 'rxjs';
 import { ConsentDataService } from 'libs/db/consents-db/src/lib/consent-data.service';
 import  *  as JWTWeb from 'jsonwebtoken';
+import { BrokerProducerService } from '../broker/broker-producer.service';
 
 @Injectable()
 export class ConsentService { 
 
+    private keyJWT = null;
+
     constructor(
         private http:HttpService,
         private config:ConfigService,
-        private consentDataService: ConsentDataService){}
+        private consentDataService: ConsentDataService,
+        private brokerProducerService: BrokerProducerService){
+
+        this.keyJWT = this.config.get('KEY_JWS');
+    }
 
 
     async create(request:RequestCreateConsent)
@@ -23,15 +30,25 @@ export class ConsentService {
                  .pipe(map(response => this.saveConsent(request, response.data))));
     }
 
+    async handlerCallbackAuthorize(jws:string)
+    {
+        const dataIWT = JWTWeb.verify(jws, this.keyJWT);
+
+        const consent = await this.consentDataService.authorizeByConsentId(dataIWT['consentId']);
+
+        this.brokerProducerService.publish(consent);
+
+
+        return consent;
+    }
+
     private async saveConsent(request:RequestCreateConsent, response: ResponseCreateConsent)
     {
         await this.consentDataService.saveByResponseAndRequest(response, request);
 
-        const keyJWT = this.config.get('KEY_JWT');
-        
         const url = this.getURLBankTransmitterApp();
 
-        const jwt =  JWTWeb.sign({consentId: response.data.consentId}, keyJWT);
+        const jwt =  JWTWeb.sign({consentId: response.data.consentId}, this.keyJWT);
         
         return `${url}?request=${jwt}`;
     }

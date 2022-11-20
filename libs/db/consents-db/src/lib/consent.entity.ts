@@ -5,33 +5,33 @@ import { Permission } from "./permission.entity";
 export class Consent
 {
     @PrimaryGeneratedColumn()
-    id: number;
+    id!: number;
     
     @Column()
-    clientName:string;
+    clientName!:string;
 
     @Column()
-    consentId:string;
+    consentId!:string;
 
     @Column()
-    clientId:string;
+    clientId!:string;
 
     @Column()
-    businessId:string;
+    businessId!:string;
 
     @Column()
-    created:Date;
+    created!:Date;
 
     @Column()
-    update:Date;
+    update!:Date;
 
     @Column()
-    expire:Date;
+    expire!:Date;
 
     @Column() // Dominio ConsentStatus
-    status:string;
+    status!:string;
 
     @OneToMany(() => Permission, permission => permission.consent, {cascade: ['insert', 'update']})
-    permissions:Array<Permission>;
+    permissions!:Array<Permission>;
 
 }

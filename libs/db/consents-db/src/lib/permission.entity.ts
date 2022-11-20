@@ -6,11 +6,11 @@ import { PermissionType } from "./permission-type.entity";
 export class Permission
 {
     @PrimaryGeneratedColumn()
-    id: number;
+    id!: number;
 
     @ManyToOne(type => PermissionType, {eager: true})
-    type:PermissionType;
+    type!:PermissionType;
 
     @ManyToOne(type => Consent)
-    consent:Consent;
+    consent!:Consent;
 }

@@ -1,0 +1,70 @@
+<nz-layout>
+  <nz-header>
+    <div class="logo">
+      <span nz-icon nzType="bank" nzTheme="outline"></span>
+      Banco Transmissor
+    </div>
+  </nz-header>
+  <nz-content>
+    <nz-card nzTitle="Confirmação de compartilhamento de dados">
+
+      <div nz-row style="margin-bottom: 10px;">
+        <div nz-col nzSpan="12" nzOffset="6">
+          <nz-card nzType="inner" nzTitle="Identificação do cliente">
+            
+            <p><strong> Nome:</strong> {{consentsData.clientName}}</p>
+
+            <p><strong> CPF:</strong> {{consentsData.clientId}} </p>
+
+          </nz-card>
+        </div>
+      </div>
+
+      <div nz-row style="margin-bottom: 10px;">
+        <div nz-col nzSpan="12" nzOffset="6">
+          <nz-card nzType="inner" nzTitle="Identificação do consentimento">
+            <p><strong> Identificador do consentimento:</strong> {{consentsData.consentId}} </p>  
+            
+            <p><strong> Data de criação:</strong> {{consentsData.created | date:'dd/MM/yyyy, hh:mm:ss'}}</p>
+
+            <p><strong> Valido até:</strong> {{consentsData.expire | date:'dd/MM/yyyy, hh:mm:ss'}} </p>
+
+          </nz-card>
+        </div>
+      </div>
+
+
+      <div nz-row style="margin-bottom: 10px;">
+        <div nz-col nzSpan="12" nzOffset="6">
+          <nz-card nzType="inner" nzTitle="Dados solicitados para compartilhamento">
+            <p *ngFor="let permission of permissions"><strong> {{permission}}</strong></p>
+          </nz-card>
+        </div>
+      </div>
+
+
+      <div nz-row style="margin-bottom: 10px;">
+        <div nz-col nzSpan="12" nzOffset="6">
+          <nz-card nzType="inner" nzTitle="Instituição Financeira">
+            <p><strong> Banco Receptor</strong></p>
+          </nz-card>
+        </div>
+      </div>
+
+
+
+      <div nz-row style="margin-bottom: 10px;">
+        <div nz-col nzSpan="12" nzOffset="6">
+          <div style="float: right">
+            <button nz-button nzType="primary" (click)="confirm()"><strong>Confirmar compartilhamento</strong></button>
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </nz-card>
+  </nz-content>
+  <nz-footer>Banco Transmissor ©2022</nz-footer>
+</nz-layout>
