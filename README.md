@@ -1,7 +1,28 @@
 ## Trabalho de MICROSERVICE DEVELOPMENT TRABALHO 2
 
 
+### Desenho da solução
+
 ![Open Banking - Compartilhamento de Dados](./ms_fiap.drawio.png "Open Banking - Compartilhamento de Dados")
+
+### Tecnologias utilizadas
+
+- NodeJs
+- Typescript
+- Nestjs - Framework para backend Nodejs
+- Angular
+- Nx - Monorepo
+- MySQL
+- RabbitMQ
+- Docker
+
+### Rodando com docker
+- Para executar com docker:
+
+```
+$ docker-compose up
+```
+- Para iniciar o fluxo acesse `http://localhost:4200`
 
 
 
