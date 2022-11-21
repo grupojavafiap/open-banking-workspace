@@ -3,9 +3,9 @@ import { Injectable } from '@nestjs/common';
 import { RequestCreateConsent, ResponseCreateConsent } from '@open-banking-workspace/schema/api/consents';
 import { ConfigService } from '@nestjs/config';
 import { firstValueFrom, map } from 'rxjs';
-import  *  as JWTWeb from 'jsonwebtoken';
 import { BrokerProducerService } from 'libs/broker-client/src';
 import { ConsentDataService } from 'libs/db/consents-db/src/lib/consent-data.service';
+import  *  as JWTWeb from 'jsonwebtoken';
 
 @Injectable()
 export class ConsentService { 

@@ -15,8 +15,9 @@ export class BrokerManagerService implements OnApplicationShutdown {
   public exchange = 'bank-receiver-consumed.x';
   public deadLetterExchange = `bank-receiver-consumed.dx`;
   public deadLetterQueue = `bank-receiver-consumed.dl`;
-  constructor(private config:ConfigService, private eventEmitter: EventEmitter2) {
-    this.init();
+  constructor(private config:ConfigService, private eventEmitter: EventEmitter2) 
+  {
+    this.init()
   }
 
   onApplicationShutdown(signal?: string) 
@@ -35,49 +36,50 @@ export class BrokerManagerService implements OnApplicationShutdown {
   /**
    * Conecta no RabbitMQ e configura as filas parametrizadas no ambiente.
    */
-  async init() 
+  async init() : Promise<any>
   {
-    try 
-    {
-      this.logger.debug(`[init] - Iniciando configuração do RabbitMQ`);
-
-      const connection = await this.getConnection();
-      this.channel = await connection.createChannel();
-
-      await this.channel.assertExchange(this.exchange, 'direct', { durable: false });
-
-      if (this.queues) 
+      try
       {
-        await this.channel.assertExchange(this.deadLetterExchange, 'direct', { durable: false });
-        await this.channel.assertQueue(this.deadLetterQueue, {  durable: false, maxLength: 1000 });
-        await this.channel.bindQueue(this.deadLetterQueue, this.deadLetterExchange, this.deadLetterQueue);
+        this.logger.debug(`[init] - Iniciando configuração do RabbitMQ`);
 
-        const args = {
-          'x-dead-letter-exchange': this.deadLetterExchange,
-          'x-dead-letter-routing-key': this.deadLetterQueue,
-        };
+        const connection = await this.getConnection();
+        this.channel = await connection.createChannel();
 
-        for(const queue of this.queues)
-        { 
-          this.logger.debug(`[init] - Configurando FILA >>> NAME ${queue} - ROUTER_KEY ${queue}`);
-          await this.channel.assertQueue(queue, { durable: false, arguments: args });
-          await this.channel.bindQueue( queue, this.exchange, queue);
-        } 
+        await this.channel.assertExchange(this.exchange, 'direct', { durable: false });
 
-      }
-
-      this.eventEmitter.emit(
-        'queues.created',
+        if (this.queues) 
         {
-          queues: this.queues
+          await this.channel.assertExchange(this.deadLetterExchange, 'direct', { durable: false });
+          await this.channel.assertQueue(this.deadLetterQueue, {  durable: false, maxLength: 1000 });
+          await this.channel.bindQueue(this.deadLetterQueue, this.deadLetterExchange, this.deadLetterQueue);
+
+          const args = {
+            'x-dead-letter-exchange': this.deadLetterExchange,
+            'x-dead-letter-routing-key': this.deadLetterQueue,
+          };
+
+          for(const queue of this.queues)
+          { 
+            this.logger.debug(`[init] - Configurando FILA >>> NAME ${queue} - ROUTER_KEY ${queue}`);
+            await this.channel.assertQueue(queue, { durable: false, arguments: args });
+            await this.channel.bindQueue( queue, this.exchange, queue);
+          } 
+
         }
-      );
-      
-    } 
-    catch (e) 
-    {
-      this.logger.error(`ERRO NA INICIALIZAÇÃO DO RABBITMQ `, e);
-    }
+
+        this.eventEmitter.emit(
+          'queues.created',
+          {
+            queues: this.queues
+          }
+        );
+        return {status: 'UP'};
+      }
+      catch(e)
+      {
+          this.logger.error(`[init] - Error na inicialização do RabbitMQ `, e);
+          throw e;
+      }
   }
 
 

@@ -7,6 +7,7 @@ export const RequestCreateConsentDoc = {
           "loggedUser": {
             "document": {
               "identification": "37290680081",
+              "name": "João da Silva",
               "rel": "CPF"
             }
           },

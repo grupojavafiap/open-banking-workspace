@@ -4,6 +4,12 @@
   "license": "MIT",
   "scripts": {
     "start": "nx run-many --parallel --target=serve --projects=bank-transmitter-app,bank-transmitter-consents-api,bank-receiver-consents-api,bank-receiver-app,bank-transmitter-data-provider,bank-receiver-consumer --maxParallel=6",
+    "bank-transmitter-app:dev:docker": "nx serve bank-transmitter-app --host=0.0.0.0",
+    "bank-transmitter-consents-api:dev:docker": "nx serve bank-transmitter-consents-api --host=0.0.0.0",
+    "bank-receiver-consents-api:dev:docker": "nx serve bank-receiver-consents-api --host=0.0.0.0",
+    "bank-receiver-app:dev:docker": "nx serve bank-receiver-app --host=0.0.0.0",
+    "bank-transmitter-data-provider:dev:docker": "nx serve bank-transmitter-data-provider --host=0.0.0.0",
+    "consumer": "nx serve bank-receiver-consumer",
     "build": "nx build",
     "test": "nx test"
   },
@@ -35,6 +41,7 @@
     "ng-zorro-antd": "^14.1.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~7.5.0",
+    "ts-retry-promise": "^0.7.0",
     "tslib": "^2.3.0",
     "typeorm": "^0.3.10",
     "zone.js": "~0.11.4"

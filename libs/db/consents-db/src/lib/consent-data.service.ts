@@ -44,7 +44,6 @@ export class ConsentDataService {
     {
         if(responseApi && requestApi)
         {
-            console.log("responseApi.data.permissions ", responseApi.data.permissions);
             const newEntity = new Consent();
             newEntity.businessId = requestApi.data.businessEntity.document.identification;
             newEntity.clientId = requestApi.data.loggedUser.document.identification;

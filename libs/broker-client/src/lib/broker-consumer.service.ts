@@ -16,9 +16,8 @@ export class BrokerConsumerService {
             {
                 for(const queue of queues)
                 {
-                    this.brokerManagerService.consumer(queue, (payload) => {
-                        console.log("call receiveMessage");
-                        receiveMessage({payload, queue});
+                    this.brokerManagerService.consumer(queue, (msg) => {
+                        receiveMessage({payload: Buffer.from(msg.content).toString(), queue});
                     });
                 }
             }   
