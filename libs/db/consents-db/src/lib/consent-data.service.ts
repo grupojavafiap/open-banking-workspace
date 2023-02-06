@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { RequestCreateConsent, ResponseCreateConsent } from '@open-banking-workspace/schema/api/consents';
 import { Repository } from 'typeorm';
 import { Consent } from './consent.entity';
 import { randomUUID } from 'crypto';
@@ -16,7 +15,7 @@ export class ConsentDataService {
 
     
 
-    saveByRequest(requestApi: RequestCreateConsent)
+    saveByRequest(requestApi: any)
     {
         if(requestApi)
         {
@@ -40,7 +39,7 @@ export class ConsentDataService {
     }
 
 
-    saveByResponseAndRequest(responseApi: ResponseCreateConsent, requestApi: RequestCreateConsent)
+    saveByResponseAndRequest(responseApi: any, requestApi: any)
     {
         if(responseApi && requestApi)
         {

@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { BrokerManagerService } from './broker-manager.service';
-import { Consent } from 'libs/db/consents-db/src/lib/consent.entity';
+import { Consent } from '@open-banking-workspace/db/consents-db';
 
 @Injectable()
 export class BrokerProducerService {

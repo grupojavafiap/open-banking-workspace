@@ -1,10 +1,10 @@
 import { Body, Controller, Delete, Get, Logger, Param, Post, Put, Query, Res } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags, ApiBody } from '@nestjs/swagger';
 import { RequestCreateConsent, ResponseCreateConsent } from '@open-banking-workspace/schema/api/consents';
-import { Consent } from 'libs/db/consents-db/src/lib/consent.entity';
-import { RequestCreateConsentDoc } from 'libs/schema/api/consents/src/lib/request-create-consent.doc';
+import { Consent } from '@open-banking-workspace/db/consents-db';
+import { RequestCreateConsentDoc } from '@open-banking-workspace/schema/api/consents';
 import { ConsentService } from './consent.service';
-import { Response } from 'express';
+
 
 @ApiTags("Consents")
 @Controller("consents")

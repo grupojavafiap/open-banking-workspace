@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ResponseCreateConsent } from '@open-banking-workspace/schema/api/consents';
-import { Consent } from 'libs/db/consents-db/src/lib/consent.entity';
+import { Consent } from '@open-banking-workspace/db/consents-db';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ShareRequestService } from './share-request.service';
 

@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Consent } from "libs/db/consents-db/src/lib/consent.entity";
+import { Consent } from "@open-banking-workspace/db/consents-db";
 
 const expire = new Date();
 expire.setMonth(expire.getMonth() + 12);

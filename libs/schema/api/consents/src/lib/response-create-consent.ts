@@ -1,16 +1,17 @@
-import { Consent } from "libs/db/consents-db/src/lib/consent.entity";
 
 export class ResponseCreateConsent {
 
-    constructor(consent?:Consent){
+    constructor(consent?:any){
 
         if(consent)
         {
+            const permissions = consent.permissions as Array<any>;
+            
             this.data = {
                 consentId: consent.consentId,
                 creationDateTime: consent.created.toISOString(),
                 expirationDateTime: consent.expire.toISOString(),
-                permissions: consent.permissions.map(permission => ({
+                permissions: permissions.map(permission => ({
                     type: permission.type.id,
                     description: permission.type.description
                 })),
