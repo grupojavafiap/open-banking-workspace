@@ -9,11 +9,12 @@
     "bank-receiver-consents-api:dev:docker": "nx serve bank-receiver-consents-api --host=0.0.0.0",
     "bank-receiver-app:dev:docker": "nx serve bank-receiver-app --host=0.0.0.0",
     "bank-transmitter-data-provider:dev:docker": "nx serve bank-transmitter-data-provider --host=0.0.0.0",
+    "start:bank-transmitter-consents-api": "node dist/apps/bank-receiver-consents-api/main",
     "consumer": "nx serve bank-receiver-consumer",
     "build": "nx build",
     "test": "nx test"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/animations": "~15.0.0",
     "@angular/common": "~15.0.0",
