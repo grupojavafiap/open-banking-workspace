@@ -12,7 +12,8 @@
     "start:bank-transmitter-consents-api": "node dist/apps/bank-receiver-consents-api/main",
     "consumer": "nx serve bank-receiver-consumer",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "migrate": "nx migrate latest"
   },
   "private": false,
   "dependencies": {

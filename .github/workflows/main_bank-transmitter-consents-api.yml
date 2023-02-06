@@ -23,9 +23,8 @@ jobs:
 
       - name: npm install, build, and test
         run: |
-          npm config set legacy-peer-deps true
-          npm install
-          npm run build --if-present
+          yarn install
+          npm build --if-present
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
