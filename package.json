@@ -9,7 +9,8 @@
     "start:receiver-api": "node dist/apps/bank-receiver-consents-api/main",
     "start:receiver-consumer": "node dist/apps/bank-receiver-consumer/main",
     "consumer": "nx serve bank-receiver-consumer",
-    "build": "nx build",
+    "build": "nx run-many --parallel --target=build --projects=bank-transmitter-app,bank-transmitter-consents-api,bank-receiver-consents-api,bank-receiver-app,bank-transmitter-data-provider,bank-receiver-consumer --maxParallel=6",
+
     "test": "nx test",
     "migrate": "nx migrate latest"
   },

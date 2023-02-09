@@ -15,7 +15,7 @@ export class ConsentDataService {
 
     
 
-    saveByRequest(requestApi: any)
+    saveByRequest(requestApi)
     {
         if(requestApi)
         {
@@ -29,7 +29,7 @@ export class ConsentDataService {
             newEntity.consentId = randomUUID();
             newEntity.expire = new Date(requestApi.data.expirationDateTime);
             newEntity.status = ConsentStatus.AWAITING_AUTHORISATION;
-            const permissions: any =  requestApi.data.permissions.map(p => ({
+            const permissions =  requestApi.data.permissions.map(p => ({
                 type: {id: p},
             }));
             newEntity.update = now;
@@ -39,7 +39,7 @@ export class ConsentDataService {
     }
 
 
-    saveByResponseAndRequest(responseApi: any, requestApi: any)
+    saveByResponseAndRequest(responseApi, requestApi)
     {
         if(responseApi && requestApi)
         {
@@ -51,7 +51,7 @@ export class ConsentDataService {
             newEntity.consentId = responseApi.data.consentId;
             newEntity.expire = new Date(responseApi.data.expirationDateTime);
             newEntity.status = responseApi.data.status;
-            const permissions: any =  responseApi.data.permissions.map(p => ({
+            const permissions =  responseApi.data.permissions.map(p => ({
                 type: {id: p.type},
             }));
             newEntity.update = new Date(responseApi.data.statusUpdateDateTime);
