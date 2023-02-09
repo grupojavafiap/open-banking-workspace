@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/aa1a16f2-5319-4d38-a059-10ddd4a234fb/AppServices/subscriptions/aa1a16f2-5319-4d38-a059-10ddd4a234fb/resourceGroups/open_finance/providers/Microsoft.Web/sites/bank-transmitter-consents-api",
+    "appService.deploySubpath": "."
+}
