@@ -13,6 +13,8 @@
     "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
+    "noImplicitAny": false,
+    "noImplicitReturns": false,
     "baseUrl": ".",
     "paths": {
       "@open-banking-workspace/broker-client": [

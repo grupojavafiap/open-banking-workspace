@@ -15,7 +15,7 @@ export class ConsentDataService {
 
     
 
-    saveByRequest(requestApi)
+    saveByRequest(requestApi: any)
     {
         if(requestApi)
         {
@@ -39,7 +39,7 @@ export class ConsentDataService {
     }
 
 
-    saveByResponseAndRequest(responseApi, requestApi)
+    saveByResponseAndRequest(responseApi:any, requestApi:any)
     {
         if(responseApi && requestApi)
         {
