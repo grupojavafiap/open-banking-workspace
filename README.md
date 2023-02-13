@@ -8,7 +8,13 @@
 ![Open Banking - Compartilhamento de Dados](./ms_fiap.drawio.png "Open Banking - Compartilhamento de Dados")
 
 ### Apresentação da solução. 
-TODO: INCLUIR LINK.
+
+- Link para o google driver
+- https://drive.google.com/file/d/1MbBeHtrKrkmCIf-KwYW-sTfU5mP4eWEt/view
+
+- Link para o youtube
+- https://www.youtube.com/watch?v=gBHQP0QiQok
+
 
 
 ### Tecnologias utilizadas
@@ -37,6 +43,9 @@ https://bank-transmitter-app.azurewebsites.net
 
 - Api Banco Transmissor
 - https://bank-transmitter-consents-api.azurewebsites.net/docs
+
+- Imagens Docker:
+- https://hub.docker.com/repositories/benisson
 
 ### Desenvolvedores
 
