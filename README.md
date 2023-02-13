@@ -26,10 +26,17 @@ TODO: INCLUIR LINK.
 
 ### Links da solução rodando na Azure
 
-TODO: Incluir os links.
+- FrontEnd Banco Receptor.
+[https://bank-receiver-app.azurewebsites.net/](https://bank-receiver-app.azurewebsites.net/)
 
+- FronEnd Banco Transmissor
+[https://bank-transmitter-app.azurewebsites.net/](https://bank-transmitter-app.azurewebsites.net/)
 
+- Api Banco Receptor
+- https://bank-receiver-consents-api.azurewebsites.net/docs
 
+- Api Banco Transmissor
+- https://bank-transmitter-consents-api.azurewebsites.net/docs
 
 ### Desenvolvedores
 
