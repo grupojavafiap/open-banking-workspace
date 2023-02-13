@@ -1,17 +1,20 @@
 ## Trabalho de CLOUD DEVELOPMENT
 
+- Turma: 1SCJRBB
+- Disciplica: CLOUD DEVELOPMENT
+- Professor: LUCAS SIMÕES MAISTRO
 
 ### Desenho da solução
-
 ![Open Banking - Compartilhamento de Dados](./ms_fiap.drawio.png "Open Banking - Compartilhamento de Dados")
 
 ### Apresentação da solução. 
-
 TODO: INCLUIR LINK.
 
 
 ### Tecnologias utilizadas
-
+- Service App Azure
+- MySQL Cloud Azure
+- RabbitMQ Cloud Azure
 - NodeJs
 - Typescript
 - Nestjs - Framework para backend Nodejs
@@ -21,13 +24,9 @@ TODO: INCLUIR LINK.
 - RabbitMQ
 - Docker
 
-### Rodando com docker
-- Para executar com docker:
+### Links da solução rodando na Azure
 
-```
-$ docker-compose up
-```
-- Para iniciar o fluxo acesse `http://localhost:4200`
+TODO: Incluir os links.
 
 
 
