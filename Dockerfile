@@ -1,9 +1,10 @@
-FROM node:14
+FROM node:18
 
 WORKDIR /app
 
 COPY . .
 
-RUN npm install
+#RUN npm install
+#RUN npm run build-transmitter-api
 
-CMD ["npm", "run", "start", "app-1"]
+CMD ["npm", "run", "start-transmitter-api"]

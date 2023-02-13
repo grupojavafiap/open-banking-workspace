@@ -18,7 +18,7 @@
  
    app.enableCors();
    
-   const port = process.env.PORT || 3336;
+   const port = process.env.PORT || 3000;
    await app.listen(port);
    logger.log(
      `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`

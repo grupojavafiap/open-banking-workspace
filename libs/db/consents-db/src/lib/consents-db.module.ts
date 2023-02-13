@@ -22,6 +22,9 @@ export class ConsentsDbModule {
           database: options.database,
           entities: [Consent, Permission, PermissionType],
           synchronize: true,
+          ssl: {
+            rejectUnauthorized: true
+          }
         }),
         TypeOrmModule.forFeature([Consent, Permission, PermissionType])
       ],

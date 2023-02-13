@@ -36,7 +36,7 @@
     ],
     "sharedGlobals": []
   },
-  "defaultProject": "bank-receiver-consents-api",
+  "defaultProject": "bank-transmitter-consents-api",
   "generators": {
     "@nrwl/angular:application": {
       "style": "css",
